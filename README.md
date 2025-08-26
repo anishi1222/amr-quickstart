@@ -53,7 +53,7 @@ mvn clean package
 
 ### Run the application
 ```bash
-java -cp target/amr-quickstart-1.0-SNAPSHOT-jar-with-dependencies.jar
+java --jar target/amr-quickstart-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 
 ## Project structure
