@@ -10,7 +10,7 @@ This project implements Azure Managed Identity authentication with the following
 
 ## Prerequisites
 
-- Java 8 or higher
+- Java 8 or higher (tested on Java 21)
 - Maven 3.6 or higher
 - Azure subscription
 - Azure Managed Redis instance
