@@ -64,6 +64,6 @@ src/main/java/dev/logicojp/
 ├── JedisAppToken.java    # Jedis + Token authentication
 ├── LettuceAppMI.java     # Lettuce + Managed Identity
 ├── LettuceAppToken.java  # Lettuce + Token authentication
-└── MIType.java           # Managed Identity type definitions
+└── AMR_Constant.java     # Constants used in this project
 ```
 
