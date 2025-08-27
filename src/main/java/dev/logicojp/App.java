@@ -11,9 +11,9 @@ public class App
         for(AMR_Constant.MIType type : AMR_Constant.MIType.values()) {
             System.out.printf(
                     """
-                        ******************************************
-                        execution started with %s
-                        ******************************************
+                    ******************************************
+                    execution started with %s
+                    ******************************************
                     """, type);
             try {
                 JedisAppToken jedisApp = new JedisAppToken();
@@ -23,9 +23,9 @@ public class App
             }
             System.out.println(
                     """
-                        ******************************************
-                        JedisApp executed
-                        ******************************************
+                    ******************************************
+                    JedisApp executed
+                    ******************************************
                     """);
 
             try {
@@ -36,9 +36,9 @@ public class App
             }
             System.out.println(
                     """
-                        ******************************************
-                        JedisAppMI executed
-                        ******************************************
+                    ******************************************
+                    JedisAppMI executed
+                    ******************************************
                     """);
 
             try {
@@ -49,9 +49,9 @@ public class App
             }
             System.out.println(
                     """
-                        ******************************************
-                        LettuceApp executed
-                        ******************************************
+                    ******************************************
+                    LettuceApp executed
+                    ******************************************
                     """);
 
             try {
@@ -62,9 +62,9 @@ public class App
             }
             System.out.println(
                     """
-                        ******************************************
-                        LettuceAppMI executed
-                        ******************************************
+                    ******************************************
+                    LettuceAppMI executed
+                    ******************************************
                     """);
         }
         System.exit(0);
