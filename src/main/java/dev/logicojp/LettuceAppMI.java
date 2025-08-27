@@ -13,26 +13,18 @@ import java.util.Set;
 
 public class LettuceAppMI
 {
-    final String UAMI_OBJECT_ID = System.getenv("UAMI_OBJECT_ID");
-    final String SAMI_CLIENT_ID =  System.getenv("SAMI_CLIENT_ID");
-    final String UAMI_CLIENT_ID= System.getenv("UAMI_CLIENT_ID");
-    final String SCOPE=System.getenv("MI_SCOPE");
-    final String HOST=System.getenv("REDIS_HOST");
-    final int PORT=Integer.parseInt(System.getenv("REDIS_PORT"));
-    final String AZURE_TENANT_ID=System.getenv("AZURE_TENANT_ID");
-
-    public void go(MIType type) {
+    public void go(AMR_Constant.MIType type) {
         TokenBasedRedisCredentialsProvider credentialManager;
         try(EntraIDTokenAuthConfigBuilder builder = EntraIDTokenAuthConfigBuilder.builder()) {
             switch (type) {
-                case SYSTEM_ASSIGNED_MANAGED_IDENTITY -> builder.clientId(SAMI_CLIENT_ID)
+                case SYSTEM_ASSIGNED_MANAGED_IDENTITY -> builder.clientId(AMR_Constant.SAMI_CLIENT_ID)
                    .systemAssignedManagedIdentity()
-                   .scopes(Set.of(SCOPE))
-                   .authority("https://login.microsoftonline.com/%s".formatted(AZURE_TENANT_ID));
-                case USER_ASSINGED_MANAGED_IDENTITY -> builder.clientId(UAMI_CLIENT_ID)
-                        .userAssignedManagedIdentity(ManagedIdentityInfo.UserManagedIdentityType.OBJECT_ID, UAMI_OBJECT_ID)
-                        .scopes(Set.of(SCOPE))
-                        .authority("https://login.microsoftonline.com/%s".formatted(AZURE_TENANT_ID));
+                   .scopes(Set.of(AMR_Constant.SCOPE))
+                   .authority(AMR_Constant.AUTHORITY_URL);
+                case USER_ASSINGED_MANAGED_IDENTITY -> builder.clientId(AMR_Constant.UAMI_CLIENT_ID)
+                        .userAssignedManagedIdentity(ManagedIdentityInfo.UserManagedIdentityType.OBJECT_ID, AMR_Constant.UAMI_OBJECT_ID)
+                        .scopes(Set.of(AMR_Constant.SCOPE))
+                        .authority(AMR_Constant.AUTHORITY_URL);
                 default -> {
                     // This expression never runs.
                     return;
@@ -50,8 +42,8 @@ public class LettuceAppMI
         System.out.println(clientOptions);
 
         RedisURI redisURI = RedisURI.builder()
-                .withHost(HOST)
-                .withPort(PORT)
+                .withHost(AMR_Constant.HOST)
+                .withPort(AMR_Constant.PORT)
                 .withAuthentication(credentialManager)
                 .withSsl(true)
                 .build();

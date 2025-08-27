@@ -1,47 +1,71 @@
 package dev.logicojp;
 
+
+import java.util.logging.Logger;
+
 public class App
 {
-    public static void main(String... args ) {
+    public static void main(String... args) {
 
-        for(MIType type : MIType.values()) {
+        Logger logger = Logger.getLogger(App.class.getName());
+        for(AMR_Constant.MIType type : AMR_Constant.MIType.values()) {
             System.out.printf(
-            """
-                *******\n\n
-                execution started with %s\n\n
-                *******
-            """, type);
+                    """
+                        ******************************************
+                        execution started with %s
+                        ******************************************
+                    """, type);
             try {
                 JedisAppToken jedisApp = new JedisAppToken();
                 jedisApp.go(type);
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.severe(e.getLocalizedMessage());
             }
-            System.out.println("JedisApp executed");
+            System.out.println(
+                    """
+                        ******************************************
+                        JedisApp executed
+                        ******************************************
+                    """);
 
             try {
                 JedisAppMI jedisAppMI = new JedisAppMI();
                 jedisAppMI.go(type);
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.severe(e.getLocalizedMessage());
             }
-            System.out.println("JedisAppMI executed");
+            System.out.println(
+                    """
+                        ******************************************
+                        JedisAppMI executed
+                        ******************************************
+                    """);
 
             try {
                 LettuceAppToken lettuceApp = new LettuceAppToken();
                 lettuceApp.go(type);
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.severe(e.getLocalizedMessage());
             }
-            System.out.println("LettuceApp executed");
+            System.out.println(
+                    """
+                        ******************************************
+                        LettuceApp executed
+                        ******************************************
+                    """);
 
             try {
                 LettuceAppMI lettuceAppMI = new LettuceAppMI();
                 lettuceAppMI.go(type);
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.severe(e.getLocalizedMessage());
             }
-            System.out.println("LettuceAppMI executed");
+            System.out.println(
+                    """
+                        ******************************************
+                        LettuceAppMI executed
+                        ******************************************
+                    """);
         }
         System.exit(0);
     }

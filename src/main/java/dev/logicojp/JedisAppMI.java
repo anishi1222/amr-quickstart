@@ -7,26 +7,24 @@ import redis.clients.jedis.authentication.AuthXManager;
 
 import java.util.Set;
 
-
 public class JedisAppMI
 {
-    final String UAMI_OBJECT_ID = System.getenv("UAMI_OBJECT_ID");
-    final String SCOPE=System.getenv("MI_SCOPE");
-    final String HOST=System.getenv("REDIS_HOST");
-    final int PORT=Integer.parseInt(System.getenv("REDIS_PORT"));
-
-    public void go(MIType type) {
+    public void go(AMR_Constant.MIType type) {
 
         TokenAuthConfig authConfig;
         try(EntraIDTokenAuthConfigBuilder builder = EntraIDTokenAuthConfigBuilder.builder()) {
             switch (type) {
                 case USER_ASSINGED_MANAGED_IDENTITY -> authConfig = builder
-                        .userAssignedManagedIdentity(ManagedIdentityInfo.UserManagedIdentityType.OBJECT_ID, UAMI_OBJECT_ID)
-                        .scopes(Set.of(SCOPE))
+                        .userAssignedManagedIdentity(ManagedIdentityInfo.UserManagedIdentityType.OBJECT_ID, AMR_Constant.UAMI_OBJECT_ID)
+                        .scopes(Set.of(AMR_Constant.SCOPE))
+                        .authority(AMR_Constant.AUTHORITY_URL)
+                        .clientId(AMR_Constant.UAMI_CLIENT_ID)
                         .build();
                 case SYSTEM_ASSIGNED_MANAGED_IDENTITY -> authConfig = builder
                         .systemAssignedManagedIdentity()
-                        .scopes(Set.of(SCOPE))
+                        .scopes(Set.of(AMR_Constant.SCOPE))
+                        .authority(AMR_Constant.AUTHORITY_URL)
+                        .clientId(AMR_Constant.SAMI_CLIENT_ID)
                         .build();
                 default -> {
                     // This expression never runs...
@@ -44,7 +42,7 @@ public class JedisAppMI
                 .build();
 
         UnifiedJedis jedis = new UnifiedJedis(
-                new HostAndPort(HOST, PORT),
+                new HostAndPort(AMR_Constant.HOST, AMR_Constant.PORT),
                 config
         );
 
