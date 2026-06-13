@@ -41,15 +41,13 @@ public class JedisAppMI
                 .ssl(true)
                 .build();
 
-        UnifiedJedis jedis = new UnifiedJedis(
-                new HostAndPort(AMR_Constant.HOST, AMR_Constant.PORT),
-                config
-        );
-
-        System.out.println(jedis);
-        System.out.println("Connected to redis as :" + config.getAuthXManager().get().getUser());
-        System.out.println("Db size :" + jedis.dbSize());
-
-        jedis.close();
+        try (RedisClient client = RedisClient.builder()
+            .hostAndPort(new HostAndPort(AMR_Constant.HOST, AMR_Constant.PORT))
+            .clientConfig(config)
+            .build()) {
+            System.out.println(client);
+            System.out.println("Connected to redis as :" + config.getAuthXManager().get().getUser());
+            System.out.println("Db size :" + client.dbSize());
+        }
     }
 }
