@@ -15,6 +15,7 @@
         <maven.compiler.release>25</maven.compiler.release>
         <maven.assembly.plugin.version>3.8.0</maven.assembly.plugin.version>
         <jackson.version>3.2.3</jackson.version>
+        <jackson2.version>2.18.11</jackson2.version>
         <junit.version>4.13.2</junit.version>
         <lettuce.core.version>7.8.0.RELEASE</lettuce.core.version>
         <jedis.version>8.0.1</jedis.version>
@@ -31,6 +32,13 @@
                 <groupId>tools.jackson</groupId>
                 <artifactId>jackson-bom</artifactId>
                 <version>${jackson.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${jackson2.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
